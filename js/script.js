@@ -468,7 +468,7 @@ var THEMEMASCOT = {};
 		$('.time-countdown-two').each(function() {
 		var $this = $(this), finalDate = $(this).data('countdown');
 		$this.countdown(finalDate, function(event) {
-			var $this = $(this).html(event.strftime('' + '<div class="counter-column"><span class="count">%m</span><sub>Month</sub></div> ' + '<div class="counter-column"><span class="count">%D</span><sub>Days</sub></div> ' + '<div class="counter-column"><span class="count">%H</span><sub>Hours</sub></div>  ' + '<div class="counter-column"><span class="count">%M</span><sub>Minutes</sub></div>  ' + '<div class="counter-column"><span class="count">%S</span><sub>Seconds</sub></div>'));
+			var $this = $(this).html(event.strftime('' + '<div class="counter-column"><span class="count">%D</span><sub>Días</sub></div> ' + '<div class="counter-column"><span class="count">%H</span><sub>Horas</sub></div>  ' + '<div class="counter-column"><span class="count">%M</span><sub>Minutos</sub></div>  ' + '<div class="counter-column"><span class="count">%S</span><sub>Segundos</sub></div>'));
 		});
 		});
 	}

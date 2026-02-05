@@ -5881,6 +5881,27 @@ Section Title
   color: var(--theme-color-dark);
 }
 
+@media (max-width: 767px) {
+  .countdown-section-four .time-counter .time-countdown-two {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .countdown-section-four .time-counter .time-countdown-two .counter-column {
+    width: 78px;
+    height: 78px;
+  }
+  .countdown-section-four .time-counter .time-countdown-two .counter-column .count {
+    font-size: 44px;
+    margin-bottom: 4px;
+  }
+  .countdown-section-four .time-counter .time-countdown-two .counter-column sub {
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 1em;
+  }
+}
+
 /*** 
 
 ====================================================================
