@@ -5122,14 +5122,7 @@ Section Title
 }
 @media (max-width: 991.98px) {
   .banner-section-four .banner-frame {
-    display: block;
-    width: min(90vw, 560px);
-    height: auto;
-    aspect-ratio: 982/795;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center top;
-    top: 24px;
+    display: none;
   }
 }
 @media (max-width: 991.98px) {
