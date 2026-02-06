@@ -68,6 +68,21 @@
         color: var(--theme-color-light);
     }
 
+    .contact-section.contact-section-overlay {
+        margin-top: -180px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-form-four.contact-form-four-proposed .title {
+        text-align: center;
+    }
+
+    .contact-form-four.contact-form-four-proposed .radio-option-group {
+        display: flex;
+        justify-content: center;
+    }
+
 </style>
 
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
@@ -212,7 +227,7 @@
     <!-- End Call To Action -->
 
     <!-- Contact Section -->
-    <section class="contact-section pt-0">
+    <section class="contact-section contact-section-overlay pt-0">
         <div class="auto-container">
             <div class="row justify-content-center">
                 <!-- Form Column -->
@@ -220,18 +235,18 @@
                     <div class="inner-column">
                         <!-- Contact Form -->
                         <div class="contact-form-four contact-form-four-proposed wow fadeInUp" data-wow-delay="200ms">
-                            <h6 class="title">¿Asistirás a la fiesta sorpresa?</h6>
+                            <h6 class="title">¿Confirmas tu asistencia?</h6>
 
                             <!--Contact Form-->
                             <form method="post" action="get" id="contact-form-cta">
                                 <div class="row">
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-6 radio-option-group">
                                         <label class="custom-radio-box">Sí, asistiré con gusto
                                             <input type="radio" name="radio-cta" id="attend-yes" value="si">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-6 radio-option-group">
                                         <label class="custom-radio-box">No podré asistir
                                             <input type="radio" name="radio-cta" id="attend-no" value="no">
                                             <span class="checkmark"></span>
