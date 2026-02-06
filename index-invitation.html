@@ -258,14 +258,13 @@
                 <!-- Form Column -->
                 <div class="form-column col-lg-8 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
                     <div class="inner-column">
+                        <div id="rsvp-feedback-global" role="status" aria-live="polite" style="display:none; margin:0 auto 18px; padding:14px 16px; border-radius:12px; max-width:640px; text-align:center; font-weight:700; font-size:18px; line-height:1.35;"></div>
+
                         <!-- Contact Form -->
                         <div class="contact-form-four contact-form-four-proposed wow fadeInUp" data-wow-delay="200ms">
                             <h6 class="title">¿Confirmas tu asistencia?</h6>
 
                             <!--Contact Form-->
-                            <div id="rsvp-feedback-global" role="status" aria-live="polite" style="display:none; margin:0 auto 18px; padding:14px 16px; border-radius:12px; max-width:640px; text-align:center; font-weight:700; font-size:18px; line-height:1.35;"></div>
-                            <p id="rsvp-feedback" role="status" aria-live="polite" style="display:none; text-align:center; margin-top:14px; padding:10px 14px; border-radius:10px; color:#fff; font-weight:700; font-size:17px; line-height:1.35;"></p>
-
                             <form method="post" action="includes/rsvp_submit.php" id="contact-form-cta">
                                 <div class="row">
                                     <div class="form-group col-lg-6 radio-option-group">
@@ -344,7 +343,6 @@
         var companionsInput = document.getElementById('companions-input');
         var notesInput = document.getElementById('notes-input');
 
-        var feedback = document.getElementById('rsvp-feedback');
         var globalFeedback = document.getElementById('rsvp-feedback-global');
 
         function showFeedback(message, variant) {
@@ -352,12 +350,6 @@
             var textColor = isSuccess ? '#0b3d1b' : '#6b0000';
             var bgColor = isSuccess ? '#d4f7dc' : '#ffe1e1';
             var borderColor = isSuccess ? '#1f8a3d' : '#d73535';
-
-            feedback.style.display = 'block';
-            feedback.style.color = textColor;
-            feedback.style.backgroundColor = bgColor;
-            feedback.style.border = '2px solid ' + borderColor;
-            feedback.textContent = message;
 
             globalFeedback.style.display = 'block';
             globalFeedback.style.color = textColor;
