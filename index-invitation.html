@@ -263,7 +263,8 @@
                             <h6 class="title">¿Confirmas tu asistencia?</h6>
 
                             <!--Contact Form-->
-                            <p id="rsvp-feedback" style="display:none; text-align:center; margin-top:14px; color:#fff; font-weight:600;"></p>
+                            <div id="rsvp-feedback-global" role="status" aria-live="polite" style="display:none; margin:0 auto 18px; padding:14px 16px; border-radius:12px; max-width:640px; text-align:center; font-weight:700; font-size:18px; line-height:1.35;"></div>
+                            <p id="rsvp-feedback" role="status" aria-live="polite" style="display:none; text-align:center; margin-top:14px; padding:10px 14px; border-radius:10px; color:#fff; font-weight:700; font-size:17px; line-height:1.35;"></p>
 
                             <form method="post" action="includes/rsvp_submit.php" id="contact-form-cta">
                                 <div class="row">
@@ -335,6 +336,7 @@
 <script src="js/script.js"></script>
 <script>
     (function () {
+        var contactSection = document.getElementById('contact');
         var attendYes = document.getElementById('attend-yes');
         var attendNo = document.getElementById('attend-no');
         var companionsGroup = document.getElementById('companions-group');
@@ -343,6 +345,30 @@
         var notesInput = document.getElementById('notes-input');
 
         var feedback = document.getElementById('rsvp-feedback');
+        var globalFeedback = document.getElementById('rsvp-feedback-global');
+
+        function showFeedback(message, variant) {
+            var isSuccess = variant === 'success';
+            var textColor = isSuccess ? '#0b3d1b' : '#6b0000';
+            var bgColor = isSuccess ? '#d4f7dc' : '#ffe1e1';
+            var borderColor = isSuccess ? '#1f8a3d' : '#d73535';
+
+            feedback.style.display = 'block';
+            feedback.style.color = textColor;
+            feedback.style.backgroundColor = bgColor;
+            feedback.style.border = '2px solid ' + borderColor;
+            feedback.textContent = message;
+
+            globalFeedback.style.display = 'block';
+            globalFeedback.style.color = textColor;
+            globalFeedback.style.backgroundColor = bgColor;
+            globalFeedback.style.border = '2px solid ' + borderColor;
+            globalFeedback.textContent = message;
+
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
 
         function toggleOptionalFields(showFields) {
             companionsGroup.style.display = showFields ? '' : 'none';
@@ -372,18 +398,15 @@
 
         var params = new URLSearchParams(window.location.search);
         if (params.get('rsvp') === 'ok') {
-            feedback.style.display = 'block';
-            feedback.textContent = '¡Gracias! Tu respuesta quedó registrada.';
+            showFeedback('✅ ¡Gracias! Tu respuesta quedó registrada correctamente.', 'success');
         }
 
         if (params.get('rsvp') === 'error') {
-            feedback.style.display = 'block';
-            feedback.textContent = 'No se pudo guardar tu respuesta. Intenta de nuevo.';
+            showFeedback('⚠️ No se pudo guardar tu respuesta. Intenta de nuevo.', 'error');
         }
 
         if (params.get('rsvp') === 'config') {
-            feedback.style.display = 'block';
-            feedback.textContent = 'El formulario aún no está configurado en servidor. Avisa al organizador.';
+            showFeedback('⚠️ El formulario aún no está configurado en servidor. Avisa al organizador.', 'error');
         }
     })();
 </script>
