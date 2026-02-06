@@ -188,7 +188,6 @@
                 <!-- Form Column -->
                 <div class="form-column col-lg-6 col-md-10 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
                     <div class="inner-column">
-                        <div class="icon-leave bounce-x"></div>
                         <!-- Contact Form -->
                         <div class="contact-form-one wow fadeInUp">
                             <h6 class="title text-center">¿Confirmas tu asistencia?</h6>
@@ -198,7 +197,7 @@
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                         <div class="radio-box">
                                             <label class="custom-radio-box-two">Sí, asistiré con gusto
-                                                <input type="radio" name="radio-cta">
+                                                <input type="radio" name="radio-cta" id="attend-yes" value="si">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -206,7 +205,7 @@
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                         <div class="radio-box">
                                             <label class="custom-radio-box-two">No podré asistir
-                                                <input type="radio" name="radio-cta">
+                                                <input type="radio" name="radio-cta" id="attend-no" value="no">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -216,17 +215,17 @@
                                             <input type="text" name="name" placeholder="Escribe tu Nombre" required>
                                         </div>
                                     </div>
-                                    <div class="form-group col-lg-12">
+                                    <div class="form-group col-lg-12" id="companions-group">
                                         <div class="input-outer">
-                                            <input type="text" name="number" placeholder="Numero de Acompañantes" required>
+                                            <input type="text" name="number" placeholder="Numero de Acompañantes" id="companions-input" required>
                                         </div>
                                     </div>
-                                    <div class="form-group col-lg-12">
+                                    <div class="form-group col-lg-12" id="notes-group">
                                         <div class="input-outer">
-                                            <textarea name="message" placeholder="Notas" required></textarea>
+                                            <textarea name="message" placeholder="Notas" id="notes-input" required></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group col-lg-12">
+                                    <div class="form-group col-lg-12 text-center">
                                         <button class="theme-btn btn-style-one" type="submit" name="submit-form"><span class="btn-title">CONFIRMAR ASISTENCIA</span></button>
                                     </div>
                                 </div>
@@ -265,5 +264,36 @@
 <script src="js/appear.js"></script>
 <script src="js/owl.js"></script>
 <script src="js/script.js"></script>
+<script>
+    (function () {
+        var attendYes = document.getElementById('attend-yes');
+        var attendNo = document.getElementById('attend-no');
+        var companionsGroup = document.getElementById('companions-group');
+        var notesGroup = document.getElementById('notes-group');
+        var companionsInput = document.getElementById('companions-input');
+        var notesInput = document.getElementById('notes-input');
+
+        function toggleOptionalFields(showFields) {
+            companionsGroup.style.display = showFields ? '' : 'none';
+            notesGroup.style.display = showFields ? '' : 'none';
+            companionsInput.required = showFields;
+            notesInput.required = showFields;
+        }
+
+        toggleOptionalFields(false);
+
+        attendYes.addEventListener('change', function () {
+            if (attendYes.checked) {
+                toggleOptionalFields(true);
+            }
+        });
+
+        attendNo.addEventListener('change', function () {
+            if (attendNo.checked) {
+                toggleOptionalFields(false);
+            }
+        });
+    })();
+</script>
 </body>
 </html>
