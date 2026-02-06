@@ -9918,6 +9918,31 @@ Section Title
     display: none;
   }
 }
+.call-to-action.video-style-bg {
+  background-color: #f7f7f7;
+  overflow: hidden;
+  max-height: none;
+}
+.call-to-action.video-style-bg .icon-leaves-25 {
+  position: absolute;
+  bottom: 40px;
+  left: -25px;
+}
+.call-to-action.video-style-bg .icon-leaves-26 {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+@media only screen and (max-width: 1699px) {
+  .call-to-action.video-style-bg .icon-leaves-26 {
+    opacity: 0.1;
+  }
+}
+.call-to-action.video-style-bg .outer-box .title,
+.call-to-action.video-style-bg .outer-box .text,
+.call-to-action.video-style-bg .outer-box .icon {
+  color: var(--theme-color-dark);
+}
 .call-to-action .outer-box {
   position: relative;
   padding: 170px 0 280px;
