@@ -28,6 +28,16 @@
         height: 45px;
         display: block;
     }
+
+    .preloader.preloader-with-image:before {
+        content: none;
+    }
+
+    .preloader .preloader-center-image {
+        width: 130px;
+        height: auto;
+        z-index: 1;
+    }
 </style>
 
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
@@ -44,7 +54,7 @@
 <div class="page-wrapper">
 
     <!-- Preloader -->
-    <div class="preloader"></div>
+    <div class="preloader preloader-with-image"><img class="preloader-center-image" src="images/favicon.png" alt="Cargando"></div>
 
     <!-- Banner Section -->
     <section class="banner-section-four">
