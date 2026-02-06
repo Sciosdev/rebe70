@@ -279,17 +279,17 @@
                             <h6 class="title">¿Confirmas tu asistencia?</h6>
 
                             <!--Contact Form-->
-                            <form method="post" action="get" id="contact-form-cta">
+                            <form method="post" action="includes/rsvp_submit.php" id="contact-form-cta">
                                 <div class="row">
                                     <div class="form-group col-lg-6 radio-option-group">
                                         <label class="custom-radio-box">Sí, asistiré con gusto
-                                            <input type="radio" name="radio-cta" id="attend-yes" value="si">
+                                            <input type="radio" name="attendance" id="attend-yes" value="si" required>
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
                                     <div class="form-group col-lg-6 radio-option-group">
                                         <label class="custom-radio-box">No podré asistir
-                                            <input type="radio" name="radio-cta" id="attend-no" value="no">
+                                            <input type="radio" name="attendance" id="attend-no" value="no">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -300,12 +300,12 @@
                                     </div>
                                     <div class="form-group col-lg-12" id="companions-group">
                                         <div class="input-outer">
-                                            <input type="text" name="number" placeholder="Número de Acompañantes" id="companions-input" required>
+                                            <input type="number" name="companions" placeholder="Número de Acompañantes" id="companions-input" min="0" max="20">
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-12" id="notes-group">
                                         <div class="input-outer">
-                                            <textarea name="message" placeholder="Notas" id="notes-input" required></textarea>
+                                            <textarea name="notes" placeholder="Notas" id="notes-input" maxlength="300"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-12 text-center">
@@ -360,7 +360,10 @@
             companionsGroup.style.display = showFields ? '' : 'none';
             notesGroup.style.display = showFields ? '' : 'none';
             companionsInput.required = showFields;
-            notesInput.required = showFields;
+            if (!showFields) {
+                companionsInput.value = '0';
+                notesInput.value = '';
+            }
         }
 
         toggleOptionalFields(false);
@@ -368,6 +371,9 @@
         attendYes.addEventListener('change', function () {
             if (attendYes.checked) {
                 toggleOptionalFields(true);
+                if (companionsInput.value === '0') {
+                    companionsInput.value = '';
+                }
             }
         });
 
