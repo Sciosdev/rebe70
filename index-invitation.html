@@ -38,6 +38,36 @@
         height: auto;
         z-index: 1;
     }
+
+
+    /* Ajustes visuales para el formulario comparativo (index-4) */
+    .contact-form-four.contact-form-four-proposed {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .contact-form-four.contact-form-four-proposed input:not([type=submit]),
+    .contact-form-four.contact-form-four-proposed textarea,
+    .contact-form-four.contact-form-four-proposed select {
+        background-color: #ffffff;
+        color: #3f4f76;
+        border-color: #ffffff;
+    }
+
+    .contact-form-four.contact-form-four-proposed ::-webkit-input-placeholder {
+        color: #3f4f76;
+    }
+
+    .contact-form-four.contact-form-four-proposed ::placeholder {
+        color: #3f4f76;
+        opacity: 1;
+    }
+
+    .contact-form-four.contact-form-four-proposed .theme-btn {
+        background-color: var(--bg-theme-color1);
+        color: var(--theme-color-light);
+    }
+
 </style>
 
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
@@ -241,7 +271,7 @@
                     <div class="inner-column mt-md-5 mt-lg-0">
                         <h5 class="text-center mb-4">Diseño propuesto (estilo index-4)</h5>
                         <!-- Contact Form -->
-                        <div class="contact-form-four">
+                        <div class="contact-form-four contact-form-four-proposed wow fadeInUp" data-wow-delay="200ms">
                             <h6 class="title">¿Asistirás a la fiesta sorpresa?</h6>
 
                             <!--Contact Form-->
@@ -275,7 +305,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-12 text-center">
-                                        <button class="theme-btn btn-style-one green" type="submit" name="submit-form"><span class="btn-title">CONFIRMAR ASISTENCIA</span></button>
+                                        <button class="theme-btn btn-style-one" type="submit" name="submit-form"><span class="btn-title">CONFIRMAR ASISTENCIA</span></button>
                                     </div>
                                 </div>
                             </form>
