@@ -381,6 +381,11 @@
             feedback.style.display = 'block';
             feedback.textContent = 'No se pudo guardar tu respuesta. Intenta de nuevo.';
         }
+
+        if (params.get('rsvp') === 'config') {
+            feedback.style.display = 'block';
+            feedback.textContent = 'El formulario aún no está configurado en servidor. Avisa al organizador.';
+        }
     })();
 </script>
 </body>

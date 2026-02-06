@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-$dbPath = __DIR__ . '/data/rsvp.sqlite';
+require_once __DIR__ . '/rsvp_db.php';
+
 $rows = [];
 $stats = [
     'total' => 0,
@@ -12,14 +13,19 @@ $stats = [
 ];
 $errorMessage = '';
 
-if (!file_exists($dbPath)) {
-    $errorMessage = 'Aún no hay respuestas registradas.';
+$providedKey = (string)($_GET['key'] ?? '');
+if (RSVP_ADMIN_KEY !== '' && !hash_equals(RSVP_ADMIN_KEY, $providedKey)) {
+    http_response_code(403);
+    $errorMessage = 'Panel protegido. Agrega tu clave en la URL: ?key=TU_CLAVE';
 } else {
     try {
-        $pdo = new PDO('sqlite:' . $dbPath);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn = rsvp_connect_db();
+        rsvp_ensure_schema($conn);
 
-        $rows = $pdo->query('SELECT guest_name, attendance, companions, notes, submitted_at FROM rsvp_responses ORDER BY id DESC')->fetchAll(PDO::FETCH_ASSOC);
+        $result = $conn->query('SELECT guest_name, attendance, companions, notes, submitted_at FROM rsvp_responses ORDER BY id DESC');
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
 
         foreach ($rows as $row) {
             $stats['total']++;
@@ -31,7 +37,7 @@ if (!file_exists($dbPath)) {
             }
         }
     } catch (Throwable $error) {
-        $errorMessage = 'No fue posible leer la base de datos.';
+        $errorMessage = 'No fue posible conectar a la base de datos. Revisa includes/rsvp_config.php';
     }
 }
 ?>

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/rsvp_db.php';
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../index-invitation.html?rsvp=error');
     exit;
@@ -29,44 +31,18 @@ if ($companions === false) {
 
 $notes = mb_substr($notes, 0, 300);
 
-$dataDir = __DIR__ . '/data';
-if (!is_dir($dataDir)) {
-    mkdir($dataDir, 0775, true);
-}
-
-$dbPath = $dataDir . '/rsvp.sqlite';
-
 try {
-    $pdo = new PDO('sqlite:' . $dbPath);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = rsvp_connect_db();
+    rsvp_ensure_schema($conn);
 
-    $pdo->exec(
-        'CREATE TABLE IF NOT EXISTS rsvp_responses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            guest_name TEXT NOT NULL,
-            attendance TEXT NOT NULL CHECK(attendance IN ("si", "no")),
-            companions INTEGER NOT NULL DEFAULT 0,
-            notes TEXT,
-            submitted_at TEXT NOT NULL
-        )'
-    );
-
-    $stmt = $pdo->prepare(
-        'INSERT INTO rsvp_responses (guest_name, attendance, companions, notes, submitted_at)
-         VALUES (:guest_name, :attendance, :companions, :notes, :submitted_at)'
-    );
-
-    $stmt->execute([
-        ':guest_name' => $name,
-        ':attendance' => $attendance,
-        ':companions' => $companions,
-        ':notes' => $notes,
-        ':submitted_at' => (new DateTimeImmutable('now', new DateTimeZone('America/Mexico_City')))->format('Y-m-d H:i:s'),
-    ]);
+    $stmt = $conn->prepare('INSERT INTO rsvp_responses (guest_name, attendance, companions, notes, submitted_at) VALUES (?, ?, ?, ?, NOW())');
+    $stmt->bind_param('ssis', $name, $attendance, $companions, $notes);
+    $stmt->execute();
 
     header('Location: ../index-invitation.html?rsvp=ok');
     exit;
 } catch (Throwable $error) {
-    header('Location: ../index-invitation.html?rsvp=error');
+    $errorCode = str_contains($error->getMessage(), 'Configuración de base de datos pendiente') ? 'config' : 'error';
+    header('Location: ../index-invitation.html?rsvp=' . $errorCode);
     exit;
 }
