@@ -11,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $name = trim((string)($_POST['name'] ?? ''));
 $attendance = (string)($_POST['attendance'] ?? '');
-$companionsRaw = (string)($_POST['companions'] ?? '0');
+$companionsRaw = trim((string)($_POST['companions'] ?? ''));
 $notes = trim((string)($_POST['notes'] ?? ''));
 
-if ($name === '' || !in_array($attendance, ['si', 'no'], true)) {
+if ($name === '' || $companionsRaw === '' || !in_array($attendance, ['si', 'no'], true)) {
     header('Location: ../index-invitation.html?rsvp=error');
     exit;
 }
