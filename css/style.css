@@ -8423,6 +8423,15 @@ Section Title
   font-weight: 600;
   font-size: 20px;
 }
+.services-block .inner-box .service-cta {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--theme-color1);
+}
 
 /*** 
 
